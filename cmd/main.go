@@ -14,6 +14,7 @@ const (
 	OperationMultiply = "Умножение *"
 	OperationDivide   = "Деление /"
 	OperationPower    = "Возведение в степень ^"
+	OperationModulo   = "Остаток от деления %"
 )
 
 func getOperator() (string, error) {
@@ -25,6 +26,7 @@ func getOperator() (string, error) {
 			OperationMultiply,
 			OperationDivide,
 			OperationPower,
+			OperationModulo,
 		},
 	}
 
@@ -54,6 +56,8 @@ func calculate(operator string, firstOperand float64, secondOperand float64) (fl
 		result = firstOperand / secondOperand
 	case OperationPower:
 		result = math.Pow(firstOperand, secondOperand)
+	case OperationModulo:
+		result = math.Mod(firstOperand, secondOperand)
 	default:
 		return result, errors.New("Неверно выбран оператор")
 	}
