@@ -6,21 +6,10 @@ import (
 )
 
 func main() {
-	cfgPath, err := config.ParseFlags()
-	if err != nil {
-		panic(err)
+	if err := config.LoadConfig("json", "./conf.json"); err != nil {
+		panic(fmt.Errorf("cannot open config file %s", err))
 	}
-
-	cfg, err := config.NewConfig(cfgPath)
-	if err != nil {
-		panic(err)
+	if err := config.LoadConfig("yaml", "./conf.yaml"); err != nil {
+		panic(fmt.Errorf("cannot open config file %s", err))
 	}
-
-	fmt.Println(cfg.Port)
-	fmt.Println(cfg.DBUrl)
-	fmt.Println(cfg.JaegerUrl)
-	fmt.Println(cfg.SentryUrl)
-	fmt.Println(cfg.KafkaBroker)
-	fmt.Println(cfg.SomeAppId)
-	fmt.Println(cfg.SomeAppKey)
 }
